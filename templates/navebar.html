@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="{% url 'index' %}">LalCoder</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto ml-auto">
+        <!-- <li class="nav-item active"> -->
+        <li {% if request.resolver_match.url_name == 'index' %}class="nav-item active"{% endif %}>
+          <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li {% if request.resolver_match.url_name == 'addstudent' %}class="nav-item active"{% endif %}>
+          <a class="nav-link" href="{% url 'addstudent' %}">Add Student</a>
+        </li>
+        <li {% if request.resolver_match.url_name == 'about' %}class="nav-item active"{% endif %}>
+          <a class="nav-link" href="{% url 'about' %}">About</a> 
+        </li>
+        </li>
+        <li {% if request.resolver_match.url_name == 'contact' %}class="nav-item active"{% endif %}>
+          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li {% if request.resolver_match.url_name == 'logout' %}class="nav-item active"{% endif %}>
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li {% if request.resolver_match.url_name == 'login' %}class="nav-item active"{% endif %}>
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        
+        <li {% if request.resolver_match.url_name == 'signUp' %}class="nav-item active"{% endif %}>
+          <a class="nav-link" href="{% url 'signUp' %}">SignUp</a>
+        </li>
+        {% endif %}
+      </ul>
+
+    </div>
+   
+  </nav>

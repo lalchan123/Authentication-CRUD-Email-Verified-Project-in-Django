@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Home Page
+{% endblock %}
+
+
+{% block contant %}
+
+<!DOCTYPE html>
+
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LalCoder || Lalchan</title>
+    <style type="text/css">
+        body {
+            color: #aa082e;
+            background-color: #081247;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        .register-form {
+            width: 90%;
+           
+        }
+
+        .note {
+            text-align: center;
+            height: 70px;
+            background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+            color: #fff;
+            font-weight: bold;
+            line-height: 70px;
+            box-shadow: 0 0 10px 5px rgba(235, 240, 238, 0.6);
+
+        }
+
+        .form-content {
+            padding: 3%;
+            border: 1px solid #ced4da;
+            margin-bottom: .5%;
+            box-shadow: 0 0 10px 5px rgba(235, 240, 238, 0.6);
+
+        }
+
+        .table {
+            
+            box-shadow: 0 0 10px 5px rgba(235, 240, 238, 0.6);
+            
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <br />
+    <br />
+
+
+    {% comment %} signup page for teacher by admin(Lalchan) {% endcomment %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container register-form">
+            <div class="form">
+                <div class="note">
+                    <p>All Student Data Show</p>
+                </div>
+
+                <div class="form-content">
+                    <table class="table table-hover table-info">
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Image</th>
+                            <th>Desc</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+
+
+                        {% for p in data %}
+                        <tr>
+                            <td>{{p.id}}</td>
+                            <td>{{p.name}}</td>
+                            <td width="15%">{{p.email}}</td>
+                            <td>{{p.phone}}</td>
+                            <td><img style="width: 80px;height: 80px;" src="{{ p.image.url}}" alt=""></td>
+                            <td>{{p.summary}}</td>
+                            <td>{{p.datetime  | timesince  }}</td>
+                          
+
+                            <td width="15%">
+                                <a   href="{% url 'update' id=p.id %}" class="btn btn-warning btn-xs">Edit</a>
+                                <a  href="{% url 'delete' id=p.id %}" class="btn btn-danger btn-xs"
+                                    onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+
+                                {% comment %} 
+                                <a  style="width: 40px;height: 33px; font-size: 12px;" href="{% url 'update' id=p.id %}" class="btn btn-warning btn-xs">Edit</a>
+                                <a style="width: 50px;height: 33px; font-size: 12px;" href="{% url 'delete' id=p.id %}" class="btn btn-danger btn-xs"
+                                    onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                                <a href="update/{{p.id}}/" class="btn btn-warning btn-xs"
+                                    data-toggle="modal" data-target="#modaledit{{p.id}}">Edit</a>
+                                <a href="{% url 'delete' id=p.id %}" class="btn btn-danger btn-xs"
+                                    onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                                <a href="/delete/{{p.id}}/" class="btn btn-danger btn-xs"
+                                    onclick="return confirm('Are You Sure To Delete ?')">Delete</a>     {% endcomment %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+
+
+    {% comment %}
+    written By Lalchan
+    facebook : https://www.facebook.com/lalchan.badsa.96
+    {% endcomment %}
+
+
+
+
+
+</body>
+
+</html>
+
+{% endblock %}

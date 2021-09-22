@@ -1,0 +1,7 @@
+{% autoescape off %}
+Assalamu alaikum {{ user.username}}
+Please click on the link confirm your registration and activation email.
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+If you think,it's not you, then just ignore your email.
+
+{% endautoescape %}
